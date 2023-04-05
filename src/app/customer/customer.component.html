@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="container">
+      <div class="row">
+        <div class="cols-xl-7"></div>
+        <div class="cols-xl-5">
+      <button class="btn btn-primary" type="button" (click)="addNewCustomer()">New Customer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="col-xl-7">
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+          <tr>
+            <th>Customer Name</th>
+            <th>Account Number</th>
+            <th>Sort Code</th>
+            <th>Currency</th>
+            <th>Balance</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody *ngIf="numberOfCustomers > 0">
+          <tr *ngFor="let customer of customers">
+            <td>{{ customer.customerName }}</td>
+            <td>{{ customer.accountNumber }}</td>
+            <td>{{ customer.sortcode }}</td>
+            <td>{{ customer.currency }}</td>
+            <td>{{ customer.bankBalance}}</td>
+            <td>
+              <button class="btn btn-primary" type="button" (click)="onDelete(customer)">Delete</button>
+              <button class="btn btn-primary" type="button" (click)="onEdit(customer)">Edit</button>
+            </td>
+          </tr>
+          </tbody>
+          <tbody *ngIf="numberOfCustomers == 0">
+          <tr>
+            <td colspan="5">No Customers, Please add customers using the New Customer Button</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="container">
+      <div class="row">
+        <div class="cols-xl-7"></div>
+        <div class="cols-xl-5">
+          <button class="btn btn-primary" type="button" (click)="addNewTransaction()">New Transactions</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="col-xl-7">
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+          <tr>
+            <th>Payee</th>
+            <th>Account Number</th>
+            <th>Sort Code</th>
+            <th>Currency</th>
+            <th>Amount</th>
+            <th>Transaction Name</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody *ngIf="numberOfTransaction > 0">
+          <tr *ngFor="let transaction of transactions">
+            <td>{{ transaction.payee}}</td>
+            <td>{{ transaction.accountNumber }}</td>
+            <td>{{ transaction.sortcode }}</td>
+            <td>{{ transaction.currency }}</td>
+            <td>{{ transaction.amount}}</td>
+            <td>{{ transaction.transactionName }}</td>
+            <td>
+              <button class="btn btn-primary" type="button" (click)="onDelete()">Delete</button>
+              <button class="btn btn-primary" type="button" (click)="onEdit()">Edit</button>
+            </td>
+          </tr>
+          </tbody>
+          <tbody *ngIf="numberOfTransaction == 0">
+          <tr>
+            <td colspan="5">No Transactions, Please add transactions using the New Transactions Button</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

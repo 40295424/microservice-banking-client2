@@ -1,0 +1,85 @@
+<div class="container col-xl-6">
+  <form [formGroup]="transactionDetails" (ngSubmit)="onSubmit()">
+    <div class="row form-group">
+      <label class="form-label" for="name">Payee: </label>
+      <input class="form-control" placeholder="Enter Payee" id="name" type="text" formControlName="payee"
+             required [readonly]="!editable">
+      <div
+        *ngIf=" submitted && transactionDetails.get('payee').invalid && (transactionDetails.get('payee').dirty || transactionDetails.get('payee').touched)"
+        class="alert alert-danger">
+        <div *ngIf="transactionDetails.get('payee').errors?.['required']">Please fill out Payee.</div>
+        <div *ngIf="transactionDetails.get('payee').errors?.['pattern']">Please fill out Payee.</div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <label class="form-label" for="accountNumber">Account Number: </label>
+      <input class="form-control" placeholder="Enter Account Number" id="accountNumber" type="text"
+             formControlName="accountNumber" required [readonly]="!editable">
+      <div
+        *ngIf=" submitted &&  transactionDetails.get('accountNumber').invalid && (transactionDetails.get('accountNumber').dirty || transactionDetails.get('accountNumber').touched)"
+        class="alert alert-danger">
+        <div *ngIf="transactionDetails.get('accountNumber').errors?.['required']">Please fill out Account Number.</div>
+        <div *ngIf="transactionDetails.get('accountNumber').errors?.['pattern']">Please fill out Account Number.</div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <label class="form-label" for="currency">Currency: </label>
+      <input class="form-control" placeholder="Enter Currency" id="currency" type="text" formControlName="currency"
+             required [readonly]="!editable">
+      <div
+        *ngIf="submitted &&  transactionDetails.get('currency').invalid && (transactionDetails.get('currency').dirty || transactionDetails.get('currency').touched)"
+        class="alert alert-danger">
+        <div *ngIf="transactionDetails.get('currency').errors?.['required']">Please fill out Currency.</div>
+        <div *ngIf="transactionDetails.get('currency').errors?.['pattern']">Please fill out Currency.</div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="form-label" for="currency">Transaction Name: </label>
+      <input class="form-control" placeholder="Enter Transaction name" id="transactionName" type="text" formControlName="transactionName"
+             required [readonly]="!editable">
+      <div
+        *ngIf="submitted &&  transactionDetails.get('transactionName').invalid && (transactionDetails.get('transactionName').dirty || transactionDetails.get('transactionName').touched)"
+        class="alert alert-danger">
+        <div *ngIf="transactionDetails.get('transactionName').errors?.['required']">Please fill out Currency.</div>
+        <div *ngIf="transactionDetails.get('transactionName').errors?.['pattern']">Please fill out Currency.</div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <label class="form-label" for="balance">Amount: </label>
+      <input class="form-control" placeholder="Enter Balance" id="balance" type="number" step="0.01"
+             formControlName="amount" required [readonly]="!editable">
+      <div
+        *ngIf="submitted &&  transactionDetails.get('amount').invalid && (transactionDetails.get('amount').dirty || transactionDetails.get('amount').touched)"
+        class="alert alert-danger">
+        <div *ngIf="transactionDetails.get('amount').errors?.['required']">Please fill out Amount.</div>
+        <div *ngIf="transactionDetails.get('amount').errors?.['pattern']">Please fill out Amount§.</div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <label class="form-label" for="sortcode">Sortcode: </label>
+      <input class="form-control" placeholder="Enter Sort Code" id="sortcode" type="text" formControlName="sortcode"
+             required [readonly]="!editable">
+      <div
+        *ngIf="this.submitted &&  transactionDetails.get('sortcode').invalid && (transactionDetails.get('sortcode').dirty || transactionDetails.get('sortcode').touched)"
+        class="alert alert-danger">
+        <div *ngIf="transactionDetails.get('sortcode').errors?.['required']">Please fill out Sort Code.</div>
+        <div *ngIf="transactionDetails.get('sortcode').errors?.['pattern']">Please fill out Sort Code.</div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="btn col-xl-1">
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
+      <div class="col-xl-1"></div>
+      <div class="btn col-xl-1">
+        <button class="btn btn-primary" type="button" (click)="onReset()">Reset</button>
+      </div>
+      <div class="btn col-xl-8">
+      </div>
+    </div>
+  </form>
+</div>
