@@ -49,19 +49,25 @@ export class CustomerComponent implements  OnInit, OnDestroy {
 
   }
   onEdit(customer: any) :void {
-    this.customerService.update(customer.customerId, customer).subscribe({
-      next: data => {
-        if(data === 'Updated ') {
-          this.ngOnInit();
-        }
-      },
-      error: error => {
-        console.error('There was an error!', error);
-      }
-    })
+    this.router.navigate(['edit-customer'], {state: customer});
 
   }
   addNewCustomer() :void {
     this.router.navigate(['new-customer']);
+  }
+
+  onTransaction(customer: any) :void {
+    this.router.navigate(['transactions'], {state: customer});
+
+  }
+  Logout() {
+    this.router.navigate(['/login']);
+  }
+
+  EmployeeSupport() {
+    this.router.navigate(['/employeeSupport']);
+  }
+  Budget() {
+    this.router.navigate(['/budget'])
   }
 }

@@ -1,28 +1,32 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Customer} from "../customer";
 import {CustomerService} from "../customer.service";
-import { RxFormBuilder } from '@rxweb/reactive-form-validators';
-import {ActivatedRoute, Router} from "@angular/router";
+import {RxFormBuilder} from "@rxweb/reactive-form-validators";
+import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Customer} from "../customer";
 
 @Component({
-  selector: 'app-profile-editor',
-  templateUrl: './new-customer.component.html',
-  styleUrls: ['./new-customer.component.css']
+  selector: 'app-edit-customer',
+  templateUrl: './edit-customer.component.html',
+  styleUrls: ['./edit-customer.component.css']
 })
-export class NewCustomerComponent implements  OnInit {
+export class EditCustomerComponent implements  OnInit {
+
   protected customerDetails: any | undefined;
   protected submitted: boolean | undefined;
   protected editable: boolean | undefined;
 
   constructor(private customerService: CustomerService,
               private formBuilder: RxFormBuilder,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.customerDetails = new FormGroup({
+      customerId: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/[\S]/)
+      ]),
       customerName: new FormControl('', [
         Validators.required,
         Validators.pattern(/[\S]/)
@@ -55,10 +59,13 @@ export class NewCustomerComponent implements  OnInit {
 
     this.submitted = false;
     this.editable = true;
+    console.log(history.state);
+    // @ts-ignore
+    let customer = Object.assign(new Customer(), history.state)
+    this.customerDetails.setValue(customer);
   }
 
-
-  onSubmit() {
+  onSubmit() :void {
     this.submitted = true;
     // @ts-ignore
     if (this.customerDetails.invalid) {
@@ -66,23 +73,19 @@ export class NewCustomerComponent implements  OnInit {
     }
     // @ts-ignore
     let customer = Object.assign(new Customer(), this.customerDetails.value)
-    this.customerService.create(customer).subscribe((persistedCustomer: any) => {
-      //this.customerDetails = this.formBuilder.formGroup(Customer, persistedCustomer);
-      this.editable = false;
-      this.submitted = false;
-      this.router.navigate(['/customers'])
-      console.log(JSON.stringify(persistedCustomer, null, 2));
-    });
-  }
+    this.customerService.update(customer.customerId, customer).subscribe({
+      next: data => {
+        this.router.navigate(['/customers'])
+      },
+      error: error => {
+        console.error('There was an error!', error);
+      }
+    })
 
-  onReset(): void {
-    this.submitted = false;
-    this.editable = true;
-    // @ts-ignore
-    this.customerDetails.reset();
   }
 
   onCancel() {
     this.router.navigate(['/customers'])
   }
+
 }

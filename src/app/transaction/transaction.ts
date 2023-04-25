@@ -1,34 +1,55 @@
+import {required} from "@rxweb/reactive-form-validators";
+import {Customer} from "../customer/customer";
+
 export class Transaction {
-  private payee: string;
-  private  accountNumber: string;
+  private  transactionId: String;
+  @required()
+  private payee: Customer;
+  @required()
+  private payer: Customer;
+
+  @required()
   private  currency: string;
-  private transactionName: string;
-  private sortcode : string;
+  @required()
+  private transactionDescription: string;
+
+  @required()
   private  amount: number;
 
-  constructor(payee: string, accountNumber: string, currency: string, amount: number, sortcode: string , transactionName: string) {
-    this.payee = payee;
-    this.accountNumber = accountNumber;
+  @required()
+  private payeeBalance: number;
+
+  @required()
+  private payerBalance: number;
+
+  private transactionTimestamp: any;
+
+  private transactionType: String;
+
+
+  constructor(payee: Customer,  payer: Customer, currency: string, amount: number,
+              transactionDescription: string, transactionId: String, payeeBalance : number,
+              payerBalance: number , transactionTimestamp: any,transactionType :string) {
     this.currency = currency;
     this.amount = amount;
-    this.sortcode = sortcode;
-    this.transactionName = transactionName;
+    this.transactionDescription = transactionDescription;
+    this.transactionId = transactionId;
+    this.payer = payer;
+    this.payee = payee;
+    this.payeeBalance = payeeBalance;
+    this.payerBalance = payerBalance;
+    this.transactionTimestamp = transactionTimestamp ;
+    this.transactionType = transactionType;
   }
 
-  public getTransactionName(): string {
-    return this.transactionName;
+  public getTransactionDescription(): string {
+    return this.transactionDescription;
   }
 
-  public setTransactionName( transactionName : string ) {
-    this.transactionName = transactionName;
-  }
-  public getAccountNumber(): string {
-    return this.accountNumber;
+  public setTransactionDescription( transactionDescription : string ) {
+    this.transactionDescription = transactionDescription;
   }
 
-  public setAccountNumber( accountNumber : string ) {
-    this.accountNumber = accountNumber;
-  }
   public getCurrency(): string {
     return this.currency;
   }
@@ -36,25 +57,59 @@ export class Transaction {
   public setCurrency( currency : string ) {
     this.currency = currency;
   }
-  public getamount(): number {
+  public getAmount(): number {
     return this.amount;
   }
 
-  public setamount( amount : number ) {
+  public setAmount( amount : number ) {
     this.amount = amount;
   }
-  public getSortCode(): string {
-    return this.sortcode;
-  }
 
-  public setSortCode( sortcode : string ) {
-    this.sortcode = sortcode;
-  }
-  public getPayee(): string {
+  public getPayee(): Customer {
     return this.payee;
   }
 
-  public setPayee( payee : string ) {
+  public setPayee( payee : Customer ) {
     this.payee = payee;
+  }
+
+  public getPayer(): Customer {
+    return this.payer;
+  }
+
+  public setPayer( payer : Customer ) {
+    this.payer = payer;
+  }
+
+  public getPayeeBalance(): number {
+    return this.payeeBalance;
+  }
+
+  public setPayeeBalance( payeeBalance : number ) {
+    this.payeeBalance = payeeBalance;
+  }
+
+  public getPayerBalance(): number {
+    return this.payerBalance;
+  }
+
+  public setPayerBalance( payerBalance : number ) {
+    this.payerBalance = payerBalance;
+  }
+
+  public getTransactionTimestamp(): any {
+    return this.transactionTimestamp;
+  }
+
+  public setTransactionTimestamp( transactionTimestamp : any ) {
+    this.transactionTimestamp = transactionTimestamp;
+  }
+
+  public getTransactionType(): any {
+    return this.transactionType;
+  }
+
+  public setTransactionType( transactionType : any ) {
+    this.transactionType = transactionType;
   }
 }

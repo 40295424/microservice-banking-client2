@@ -1,13 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="container">
-      <div class="row">
-        <div class="cols-xl-7"></div>
-        <div class="cols-xl-5">
+        <div class="cols-xl-1 inline-div-display"></div>
+        <div class="cols-xl-3 inline-div-display">
       <button class="btn btn-primary" type="button" (click)="addNewCustomer()">New Customer</button>
         </div>
+        <div class="cols-xl-1 inline-div-display"></div>
+        <div class="cols-xl-3 inline-div-display">
+          <button class="btn btn-primary" type="button" (click)="EmployeeSupport()">Support</button>
+        </div>
+        <div class="cols-xl-1 inline-div-display"></div>
+        <div class="cols-xl-3 inline-div-display">
+            <button class="btn btn-primary" type="button" (click)="Logout()">Logout</button>
+        </div>
       </div>
-    </div>
   </div>
   <div class="row">
     <div class="container">
@@ -33,6 +39,7 @@
             <td>
               <button class="btn btn-primary" type="button" (click)="onDelete(customer)">Delete</button>
               <button class="btn btn-primary" type="button" (click)="onEdit(customer)">Edit</button>
+<!--              <button class="btn btn-primary" type="button" (click)="onTransaction(customer)">Transactions</button>-->
             </td>
           </tr>
           </tbody>

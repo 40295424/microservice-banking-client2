@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { Transaction } from './transaction';
+import {Customer} from "../customer/customer";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,8 @@ import { Transaction } from './transaction';
 export class TransactionService {
 
   private apiURL = "http://localhost:8080";
-  private endpoint = "/transaction/";
+  private endpoint = "/transaction";
+  private customerEndpoint = "/customer";
 
   /*------------------------------------------
   --------------------------------------------
@@ -37,9 +37,9 @@ export class TransactionService {
    *
    * @return response()
    */
-  getAll(): Observable<any> {
+  getAll(customerId: string): Observable<any> {
 
-    return this.httpClient.get(this.apiURL + this.endpoint)
+    return this.httpClient.get(this.apiURL +  this.customerEndpoint + "/" + customerId +  "/transactions")
 
       .pipe(
         catchError(this.errorHandler)
@@ -67,13 +67,12 @@ export class TransactionService {
    */
   find(id:number): Observable<any> {
 
-    return this.httpClient.get(this.apiURL + this.endpoint + id)
+    return this.httpClient.get(this.apiURL + this.endpoint + "/" + id)
 
       .pipe(
         catchError(this.errorHandler)
       )
   }
-
   /**
    * Write code on Method
    *
@@ -81,7 +80,7 @@ export class TransactionService {
    */
   update(id:number, transaction: Transaction): Observable<any> {
 
-    return this.httpClient.put(this.apiURL + this.endpoint + id, JSON.stringify(transaction), this.httpOptions)
+    return this.httpClient.put(this.apiURL + this.endpoint + "/" +id, JSON.stringify(transaction), this.httpOptions)
 
       .pipe(
         catchError(this.errorHandler)
@@ -94,7 +93,7 @@ export class TransactionService {
    * @return response()
    */
   delete(id:number){
-    return this.httpClient.delete(this.apiURL + this.endpoint + id, this.httpOptions)
+    return this.httpClient.delete(this.apiURL + this.endpoint + "/" +  id, {responseType: 'text'})
 
       .pipe(
         catchError(this.errorHandler)
@@ -116,3 +115,4 @@ export class TransactionService {
     return throwError(errorMessage);
   }
 }
+

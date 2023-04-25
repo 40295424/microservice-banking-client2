@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { Customer } from './customer';
 
 @Injectable({
@@ -65,7 +63,7 @@ export class CustomerService {
    *
    * @return response()
    */
-  find(id:number): Observable<any> {
+  find(id:string): Observable<any> {
 
     return this.httpClient.get(this.apiURL + this.endpoint + "/" +id)
 
