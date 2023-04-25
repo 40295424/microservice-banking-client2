@@ -17,10 +17,10 @@
       <input class="form-control" placeholder="Enter Password" id="password" type="password"
              formControlName="password" required [readonly]="!editable">
       <div
-        *ngIf=" submitted &&  loginDetails.get('accountNumber').invalid && (loginDetails.get('accountNumber').dirty || loginDetails.get('password').touched)"
+        *ngIf=" submitted &&  loginDetails.get('password').invalid && (loginDetails.get('password').dirty || loginDetails.get('password').touched)"
         class="alert alert-danger">
-        <div *ngIf="loginDetails.get('accountNumber').errors?.['required']">Please fill out Account Number.</div>
-        <div *ngIf="loginDetails.get('accountNumber').errors?.['pattern']">Please fill out Account Number.</div>
+        <div *ngIf="loginDetails.get('password').errors?.['required']">Please fill out Account Number.</div>
+        <div *ngIf="loginDetails.get('password').errors?.['pattern']">Please fill out Account Number.</div>
       </div>
     </div>
     <div  class="row form-group">
